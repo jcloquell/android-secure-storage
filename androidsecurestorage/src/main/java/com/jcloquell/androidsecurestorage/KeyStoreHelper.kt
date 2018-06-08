@@ -1,7 +1,7 @@
 package com.jcloquell.androidsecurestorage
 
 import android.annotation.TargetApi
-import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.security.KeyPairGeneratorSpec
@@ -17,7 +17,7 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.security.auth.x500.X500Principal
 
-class KeyStoreHelper constructor(private val application: Application,
+class KeyStoreHelper constructor(private val context: Context,
     private val sharedPreferences: SharedPreferences,
     private val cipherHelper: CipherHelper) {
 
@@ -88,7 +88,7 @@ class KeyStoreHelper constructor(private val application: Application,
     val start = Calendar.getInstance()
     val end = Calendar.getInstance()
     end.add(Calendar.YEAR, 30)
-    val builder = KeyPairGeneratorSpec.Builder(application)
+    val builder = KeyPairGeneratorSpec.Builder(context)
         .setAlias(ALIAS_KEY)
         .setSubject(X500Principal("CN=$ALIAS_KEY"))
         .setSerialNumber(BigInteger.TEN)

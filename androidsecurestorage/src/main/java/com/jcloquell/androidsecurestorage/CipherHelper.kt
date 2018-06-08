@@ -18,16 +18,17 @@ class CipherHelper constructor(private val sharedPreferences: SharedPreferences)
   private val asymmetricCipher = Cipher.getInstance(TRANSFORMATION_ASYMMETRIC)
   private val symmetricCipher = Cipher.getInstance(TRANSFORMATION_SYMMETRIC)
 
-  internal fun encrypt(data: String, key: Key?): String {
+  internal fun encrypt(sharedPreferencesKey: String, textToEncrypt: String, key: Key?): String {
     symmetricCipher.init(Cipher.ENCRYPT_MODE, key)
-    val bytes = symmetricCipher.doFinal(data.toByteArray())
-    saveIvInSharedPreferences(symmetricCipher.iv)
+    val bytes = symmetricCipher.doFinal(textToEncrypt.toByteArray())
+    saveIvInSharedPreferences(sharedPreferencesKey, symmetricCipher.iv)
     return Base64.encodeToString(bytes, Base64.DEFAULT)
   }
 
-  internal fun decrypt(data: String, key: Key?): String {
-    symmetricCipher.init(Cipher.DECRYPT_MODE, key, IvParameterSpec(getIvFromSharedPreferences()))
-    val encryptedData = Base64.decode(data, Base64.DEFAULT)
+  internal fun decrypt(sharedPreferencesKey: String, textToDecrypt: String, key: Key?): String {
+    symmetricCipher.init(Cipher.DECRYPT_MODE, key,
+        IvParameterSpec(getIvFromSharedPreferences(sharedPreferencesKey)))
+    val encryptedData = Base64.decode(textToDecrypt, Base64.DEFAULT)
     val decodedData = symmetricCipher.doFinal(encryptedData)
     return String(decodedData)
   }
@@ -44,13 +45,14 @@ class CipherHelper constructor(private val sharedPreferences: SharedPreferences)
     return asymmetricCipher.unwrap(encryptedData, AES_ALGORITHM, Cipher.SECRET_KEY)
   }
 
-  private fun saveIvInSharedPreferences(iv: ByteArray) {
+  private fun saveIvInSharedPreferences(sharedPreferencesKey: String, iv: ByteArray) {
     val encodedIv = Base64.encodeToString(iv, Base64.DEFAULT)
-    sharedPreferences.edit().putString(IV_PREFERENCES_KEY, encodedIv).apply()
+    sharedPreferences.edit().putString("$IV_PREFERENCES_KEY$sharedPreferencesKey", encodedIv)
+        .apply()
   }
 
-  private fun getIvFromSharedPreferences(): ByteArray {
-    val encodedIv = sharedPreferences.getString(IV_PREFERENCES_KEY, null)
+  private fun getIvFromSharedPreferences(sharedPreferencesKey: String): ByteArray {
+    val encodedIv = sharedPreferences.getString("$IV_PREFERENCES_KEY$sharedPreferencesKey", null)
     return Base64.decode(encodedIv, Base64.DEFAULT)
   }
 }

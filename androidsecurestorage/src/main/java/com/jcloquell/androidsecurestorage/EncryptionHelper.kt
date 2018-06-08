@@ -1,19 +1,24 @@
 package com.jcloquell.androidsecurestorage
 
+import android.content.Context
+import android.preference.PreferenceManager
 import java.security.InvalidKeyException
 
-class EncryptionHelper constructor(private val keyStoreHelper: KeyStoreHelper,
-    private val cipherHelper: CipherHelper) {
+class EncryptionHelper constructor(context: Context) {
 
-  fun encrypt(text: String): String {
+  private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+  private val cipherHelper = CipherHelper(sharedPreferences)
+  private val keyStoreHelper = KeyStoreHelper(context, sharedPreferences, cipherHelper)
+
+  fun encrypt(sharedPreferencesKey: String, textToEncrypt: String): String {
     val key = keyStoreHelper.getSecretKey()
-    return cipherHelper.encrypt(text, key)
+    return cipherHelper.encrypt(sharedPreferencesKey, textToEncrypt, key)
   }
 
-  fun decrypt(text: String): String {
+  fun decrypt(sharedPreferencesKey: String, textToDecrypt: String): String {
     try {
       val key = keyStoreHelper.getSecretKey()
-      return cipherHelper.decrypt(text, key)
+      return cipherHelper.decrypt(sharedPreferencesKey, textToDecrypt, key)
     } catch (exception: InvalidKeyException) {
       keyStoreHelper.removeSecretKey()
     }

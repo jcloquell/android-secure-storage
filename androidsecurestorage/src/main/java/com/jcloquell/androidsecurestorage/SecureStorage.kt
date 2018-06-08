@@ -1,28 +1,35 @@
 package com.jcloquell.androidsecurestorage
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.lang.reflect.Type
 
-class SecureStorage(private val context: Context) {
+class SecureStorage constructor(context: Context) {
 
-  private val sharedPreferences: SharedPreferences =
-      PreferenceManager.getDefaultSharedPreferences(context)
-  private val gson: Gson = GsonBuilder().create()
+  private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+  private val gson = GsonBuilder().create()
+  private val encryptionHelper = EncryptionHelper(context)
 
   fun storeObject(key: String, objectToStore: Any) {
-    sharedPreferences.edit().putString(key, gson.toJson(objectToStore)).apply()
+    val encryptedObject = encryptionHelper.encrypt(key, gson.toJson(objectToStore))
+    sharedPreferences.edit().putString(key, encryptedObject).apply()
   }
 
-  fun <T> getObject(key: String, clazz: Class<T>): T {
-    return gson.fromJson(sharedPreferences.getString(key, ""), clazz)
+  fun <T> getObject(key: String, clazz: Class<T>): T? {
+    val encryptedObject = sharedPreferences.getString(key, null)
+    return encryptedObject?.let {
+      val decryptedObject = encryptionHelper.decrypt(key, encryptedObject)
+      gson.fromJson(decryptedObject, clazz)
+    }
   }
 
-  fun <T> getObject(key: String, type: Type): T {
-    return gson.fromJson(sharedPreferences.getString(key, ""), type)
+  fun <T> getObject(key: String, type: Type): T? {
+    val encryptedObject = sharedPreferences.getString(key, null)
+    return encryptedObject?.let {
+      val decryptedObject = encryptionHelper.decrypt(key, encryptedObject)
+      gson.fromJson(decryptedObject, type)
+    }
   }
 
   fun removeObject(key: String) {
