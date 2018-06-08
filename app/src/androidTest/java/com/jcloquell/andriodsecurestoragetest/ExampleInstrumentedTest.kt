@@ -1,4 +1,4 @@
-package com.jcloquell.andriodsecurestorage
+package com.jcloquell.andriodsecurestoragetest
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

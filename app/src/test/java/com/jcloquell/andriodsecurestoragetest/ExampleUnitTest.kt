@@ -1,4 +1,4 @@
-package com.jcloquell.andriodsecurestorage
+package com.jcloquell.andriodsecurestoragetest
 
 import org.junit.Test
 
