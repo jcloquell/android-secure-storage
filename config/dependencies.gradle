@@ -1,0 +1,15 @@
+ext {
+  //Libraries
+  androidSupportVersion = '27.1.1'
+  kotlinStdLibVersion = kotlinVersion
+  gsonVersion = '2.8.5'
+
+  //Testing
+  junitVersion = '4.12'
+
+  appDependencies = [androidAppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
+                     kotlinStdLib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinStdLibVersion}",
+                     gson            : "com.google.code.gson:gson:${gsonVersion}"]
+
+  appTestDependencies = [junit: "junit:junit:${junitVersion}"]
+}
