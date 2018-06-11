@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <EditText
+      android:id="@+id/stringEditText"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="String to encrypt"
+      android:inputType="text"
+      />
+
+  <Button
+      android:id="@+id/encryptStringButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Encrypt String"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Encrypted String:"
+      />
+
+  <TextView
+      android:id="@+id/encryptedStringTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
+
+  <Button
+      android:id="@+id/decryptStringButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Decrypt String"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Decrypted String:"
+      />
+
+  <TextView
+      android:id="@+id/decryptedStringTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
+
+</LinearLayout>

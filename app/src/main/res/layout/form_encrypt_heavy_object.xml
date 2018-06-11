@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+
+    <EditText
+        android:id="@+id/objectEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the size of the list"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Object to encrypt:"
+        />
+
+    <TextView
+        android:id="@+id/objectToEncryptTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:id="@+id/encryptObjectButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Encrypt Object"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Encrypted Object:"
+        />
+
+    <TextView
+        android:id="@+id/encryptedObjectTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:id="@+id/decryptObjectButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Decrypt Object"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Decrypted Object:"
+        />
+
+    <TextView
+        android:id="@+id/decryptedObjectTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+  </LinearLayout>
+
+</ScrollView>

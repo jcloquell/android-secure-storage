@@ -7,11 +7,21 @@
     tools:context=".MainActivity"
     >
 
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
-      android:text="Hello World!"
+  <include
+      layout="@layout/form_encrypt_string"
+      android:id="@+id/encryptStringForm"
+      />
+
+  <include
+      layout="@layout/form_encrypt_integer"
+      android:id="@+id/encryptIntegerForm"
+      android:visibility="gone"
+      />
+
+  <include
+      layout="@layout/form_encrypt_heavy_object"
+      android:id="@+id/encryptObjectForm"
+      android:visibility="gone"
       />
 
 </RelativeLayout>

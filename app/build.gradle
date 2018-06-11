@@ -25,4 +25,10 @@ dependencies {
   implementation appDependencies.kotlinStdLib
 
   testImplementation appTestDependencies.junit
+  testImplementation(appTestDependencies.supportTestRunner, {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  testImplementation(appTestDependencies.espresso, {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
 }

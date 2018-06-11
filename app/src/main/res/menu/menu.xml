@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+      android:id="@+id/stringMode"
+      android:title="Encrypt a String"
+      app:showAsAction="never"/>
+
+  <item
+      android:id="@+id/integerMode"
+      android:title="Encrypt an Integer"
+      app:showAsAction="never"/>
+
+  <item
+      android:id="@+id/objectMode"
+      android:title="Encrypt an Object"
+      app:showAsAction="never"/>
+
+</menu>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <EditText
+      android:id="@+id/integerEditText"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Integer to encrypt"
+      android:inputType="number"
+      />
+
+  <Button
+      android:id="@+id/encryptIntegerButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Encrypt Integer"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Encrypted Integer:"
+      />
+
+  <TextView
+      android:id="@+id/encryptedIntegerTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
+
+  <Button
+      android:id="@+id/decryptIntegerButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Decrypt Integer"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Decrypted Integer:"
+      />
+
+  <TextView
+      android:id="@+id/decryptedIntegerTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
+
+</LinearLayout>
