@@ -6,7 +6,7 @@ import java.security.Key
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 
-class CipherHelper constructor(private val sharedPreferences: SharedPreferences) {
+internal class CipherHelper constructor(private val sharedPreferences: SharedPreferences) {
 
   companion object {
     private const val TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding"

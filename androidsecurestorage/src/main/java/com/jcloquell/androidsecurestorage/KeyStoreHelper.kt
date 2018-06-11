@@ -17,7 +17,7 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.security.auth.x500.X500Principal
 
-class KeyStoreHelper constructor(private val context: Context,
+internal class KeyStoreHelper constructor(private val context: Context,
     private val sharedPreferences: SharedPreferences,
     private val cipherHelper: CipherHelper) {
 

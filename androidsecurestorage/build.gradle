@@ -29,4 +29,6 @@ dependencies {
   implementation appDependencies.gson
 
   testImplementation appTestDependencies.junit
+  testImplementation appTestDependencies.assertJ
+  testImplementation appTestDependencies.mockitoKotlin
 }

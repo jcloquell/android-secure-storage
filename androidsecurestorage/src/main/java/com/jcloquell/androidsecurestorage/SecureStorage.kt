@@ -1,15 +1,29 @@
 package com.jcloquell.androidsecurestorage
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import android.support.annotation.VisibleForTesting
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.lang.reflect.Type
 
-class SecureStorage constructor(context: Context) {
+class SecureStorage {
 
-  private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-  private val gson = GsonBuilder().create()
-  private val encryptionHelper = EncryptionHelper(context)
+  private val sharedPreferences: SharedPreferences
+  private val gson: Gson
+  private val encryptionHelper: EncryptionHelper
+
+  constructor(context: Context) : this(PreferenceManager.getDefaultSharedPreferences(context),
+      GsonBuilder().create(), EncryptionHelper(context))
+
+  @VisibleForTesting
+  internal constructor(sharedPreferences: SharedPreferences, gson: Gson,
+      encryptionHelper: EncryptionHelper) {
+    this.sharedPreferences = sharedPreferences
+    this.gson = gson
+    this.encryptionHelper = encryptionHelper
+  }
 
   fun storeObject(key: String, objectToStore: Any) {
     val encryptedObject = encryptionHelper.encrypt(key, gson.toJson(objectToStore))

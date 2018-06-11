@@ -6,10 +6,14 @@ ext {
 
   //Testing
   junitVersion = '4.12'
+  assertJVersion = '3.6.2'
+  mockitoKotlinVersion = '1.5.0'
 
   appDependencies = [androidAppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
                      kotlinStdLib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinStdLibVersion}",
                      gson            : "com.google.code.gson:gson:${gsonVersion}"]
 
-  appTestDependencies = [junit: "junit:junit:${junitVersion}"]
+  appTestDependencies = [junit        : "junit:junit:${junitVersion}",
+                         assertJ      : "org.assertj:assertj-core:${assertJVersion}",
+                         mockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"]
 }
