@@ -9,7 +9,7 @@
       android:id="@+id/stringEditText"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:hint="String to encrypt"
+      android:hint="@string/string_to_encrypt"
       android:inputType="text"
       />
 
@@ -17,13 +17,15 @@
       android:id="@+id/encryptStringButton"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Encrypt String"
+      android:text="@string/encrypt_string"
       />
 
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Encrypted String:"
+      android:text="@string/encrypted_string"
+      android:textSize="16sp"
+      android:textStyle="bold"
       />
 
   <TextView
@@ -36,13 +38,16 @@
       android:id="@+id/decryptStringButton"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Decrypt String"
+      android:layout_marginTop="@dimen/small_margin"
+      android:text="@string/decrypt_string"
       />
 
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Decrypted String:"
+      android:text="@string/decrypted_string"
+      android:textSize="16sp"
+      android:textStyle="bold"
       />
 
   <TextView

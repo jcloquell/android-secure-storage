@@ -9,7 +9,7 @@
       android:id="@+id/integerEditText"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:hint="Integer to encrypt"
+      android:hint="@string/integer_to_encrypt"
       android:inputType="number"
       />
 
@@ -17,13 +17,15 @@
       android:id="@+id/encryptIntegerButton"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Encrypt Integer"
+      android:text="@string/encrypt_integer"
       />
 
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Encrypted Integer:"
+      android:text="@string/encrypted_integer"
+      android:textSize="16sp"
+      android:textStyle="bold"
       />
 
   <TextView
@@ -36,13 +38,16 @@
       android:id="@+id/decryptIntegerButton"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Decrypt Integer"
+      android:layout_marginTop="@dimen/small_margin"
+      android:text="@string/decrypt_integer"
       />
 
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Decrypted Integer:"
+      android:text="@string/decrypted_integer"
+      android:textSize="16sp"
+      android:textStyle="bold"
       />
 
   <TextView

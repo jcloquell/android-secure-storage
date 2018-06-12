@@ -1,3 +1,19 @@
 <resources>
   <string name="app_name">Android Secure Storage</string>
+  <string name="string_to_encrypt">String to encrypt</string>
+  <string name="encrypt_string">Encrypt String</string>
+  <string name="encrypted_string">Encrypted String:</string>
+  <string name="decrypt_string">Decrypt String</string>
+  <string name="decrypted_string">Decrypted String:</string>
+  <string name="integer_to_encrypt">Integer to encrypt</string>
+  <string name="encrypt_integer">Encrypt Integer</string>
+  <string name="encrypted_integer">Encrypted Integer:</string>
+  <string name="decrypt_integer">Decrypt Integer</string>
+  <string name="decrypted_integer">Decrypted Integer:</string>
+  <string name="object_to_encrypt">Object to encrypt:</string>
+  <string name="encrypt_object">Encrypt Object</string>
+  <string name="encrypted_object">Encrypted Object:</string>
+  <string name="decrypt_object">Decrypt Object</string>
+  <string name="decrypted_object">Decrypted Object:</string>
+  <string name="size_of_list">Enter the size of the list</string>
 </resources>

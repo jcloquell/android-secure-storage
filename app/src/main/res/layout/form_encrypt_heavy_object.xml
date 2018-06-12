@@ -14,14 +14,16 @@
         android:id="@+id/objectEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter the size of the list"
+        android:hint="@string/size_of_list"
         android:inputType="number"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Object to encrypt:"
+        android:text="@string/object_to_encrypt"
+        android:textSize="16sp"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -34,13 +36,16 @@
         android:id="@+id/encryptObjectButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Encrypt Object"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="@string/encrypt_object"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Encrypted Object:"
+        android:text="@string/encrypted_object"
+        android:textSize="16sp"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -53,13 +58,16 @@
         android:id="@+id/decryptObjectButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Decrypt Object"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="@string/decrypt_object"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Decrypted Object:"
+        android:text="@string/decrypted_object"
+        android:textSize="16sp"
+        android:textStyle="bold"
         />
 
     <TextView
