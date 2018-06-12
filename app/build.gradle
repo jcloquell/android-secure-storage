@@ -26,6 +26,7 @@ dependencies {
   implementation appDependencies.gson
 
   testImplementation appTestDependencies.junit
+  testImplementation appTestDependencies.assertJ
   testImplementation(appTestDependencies.supportTestRunner, {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
