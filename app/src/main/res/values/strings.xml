@@ -15,5 +15,10 @@
   <string name="encrypted_object">Encrypted Object:</string>
   <string name="decrypt_object">Decrypt Object</string>
   <string name="decrypted_object">Decrypted Object:</string>
+  <string name="list_to_encrypt">List to encrypt:</string>
+  <string name="encrypt_list">Encrypt List</string>
+  <string name="encrypted_list">Encrypted List:</string>
+  <string name="decrypt_list">Decrypt List</string>
+  <string name="decrypted_list">Decrypted List:</string>
   <string name="size_of_list">Enter the size of the list</string>
 </resources>

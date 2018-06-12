@@ -25,10 +25,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import com.google.gson.reflect.TypeToken
 import com.jcloquell.androidsecurestorage.SecureStorage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.form_encrypt_heavy_object.*
 import kotlinx.android.synthetic.main.form_encrypt_integer.*
+import kotlinx.android.synthetic.main.form_encrypt_list.*
 import kotlinx.android.synthetic.main.form_encrypt_string.*
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private const val STRING_KEY = "stringKey"
     private const val INTEGER_KEY = "integerKey"
     private const val OBJECT_KEY = "objectKey"
+    private const val LIST_KEY = "listKey"
   }
 
   private lateinit var secureStorage: SecureStorage
@@ -58,6 +61,7 @@ class MainActivity : AppCompatActivity() {
     setUpStringEncryptionForm()
     setUpIntegerEncryptionForm()
     setUpObjectEncryptionForm()
+    setUpListEncryptionForm()
   }
 
   private fun setUpStringEncryptionForm() {
@@ -111,6 +115,36 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
+  private fun setUpListEncryptionForm() {
+    listToEncryptTextView.text = generateListBasedOnUserInput("").toString()
+    listEditText.addTextChangedListener(object : TextWatcher {
+      override fun afterTextChanged(p0: Editable) {
+        //do nothing
+      }
+
+      override fun beforeTextChanged(p0: CharSequence, p1: Int, p2: Int, p3: Int) {
+        //do nothing
+      }
+
+      override fun onTextChanged(text: CharSequence, p1: Int, p2: Int, p3: Int) {
+        val listToEncrypt = generateListBasedOnUserInput(text.toString())
+        listToEncryptTextView.text = listToEncrypt.toString()
+      }
+    })
+    encryptListButton.setOnClickListener {
+      val listToEncrypt = generateListBasedOnUserInput(listEditText.text.toString())
+      secureStorage.storeObject(LIST_KEY, listToEncrypt)
+      encryptedListTextView.text = sharedPreferences.getString(LIST_KEY, "")
+    }
+    decryptListButton.setOnClickListener {
+      // Have in mind that to decrypt any kind of Collection directly, the TypeToken class,
+      // which belongs to the Gson library, is necessary
+      val decryptedList = secureStorage.getObject<List<String>>(LIST_KEY,
+          object : TypeToken<List<String>>() {}.type)
+      decryptedListTextView.text = decryptedList.toString()
+    }
+  }
+
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.menu, menu)
     return true
@@ -122,18 +156,28 @@ class MainActivity : AppCompatActivity() {
         encryptStringForm.visibility = VISIBLE
         encryptIntegerForm.visibility = GONE
         encryptObjectForm.visibility = GONE
+        encryptListForm.visibility = GONE
         true
       }
       R.id.integerMode -> {
         encryptStringForm.visibility = GONE
         encryptIntegerForm.visibility = VISIBLE
         encryptObjectForm.visibility = GONE
+        encryptListForm.visibility = GONE
         true
       }
       R.id.objectMode -> {
         encryptStringForm.visibility = GONE
         encryptIntegerForm.visibility = GONE
         encryptObjectForm.visibility = VISIBLE
+        encryptListForm.visibility = GONE
+        true
+      }
+      R.id.listMode -> {
+        encryptStringForm.visibility = GONE
+        encryptIntegerForm.visibility = GONE
+        encryptObjectForm.visibility = GONE
+        encryptListForm.visibility = VISIBLE
         true
       }
       else -> super.onOptionsItemSelected(item)
@@ -144,6 +188,15 @@ class MainActivity : AppCompatActivity() {
     val count = if (text.isEmpty()) 0 else text.toInt()
     return HeavyObject("This is a list of Hello Worlds:",
         Array(count, { "Hello World! $it" }))
+  }
+
+  private fun generateListBasedOnUserInput(text: String): List<String> {
+    val count = if (text.isEmpty()) 0 else text.toInt()
+    val list = mutableListOf<String>()
+    (0 until count).forEach {
+      list.add("Hello World! $it")
+    }
+    return list
   }
 
   private data class HeavyObject(val title: String, val details: Array<String>)

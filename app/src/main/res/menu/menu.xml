@@ -4,17 +4,22 @@
 
   <item
       android:id="@+id/stringMode"
-      android:title="Encrypt a String"
+      android:title="@string/encrypt_string"
       app:showAsAction="never"/>
 
   <item
       android:id="@+id/integerMode"
-      android:title="Encrypt an Integer"
+      android:title="@string/encrypt_integer"
       app:showAsAction="never"/>
 
   <item
       android:id="@+id/objectMode"
-      android:title="Encrypt an Object"
+      android:title="@string/encrypt_object"
+      app:showAsAction="never"/>
+
+  <item
+      android:id="@+id/listMode"
+      android:title="@string/encrypt_list"
       app:showAsAction="never"/>
 
 </menu>

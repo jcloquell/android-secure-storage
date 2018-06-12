@@ -25,4 +25,10 @@
       android:visibility="gone"
       />
 
+  <include
+      layout="@layout/form_encrypt_list"
+      android:id="@+id/encryptListForm"
+      android:visibility="gone"
+      />
+
 </RelativeLayout>
