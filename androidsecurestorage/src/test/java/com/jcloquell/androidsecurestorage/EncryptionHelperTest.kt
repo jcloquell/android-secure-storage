@@ -1,10 +1,7 @@
 package com.jcloquell.androidsecurestorage
 
 import android.content.SharedPreferences
-import com.nhaarman.mockito_kotlin.given
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockito_kotlin.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -66,7 +63,10 @@ class EncryptionHelperTest {
     val sharedPreferencesKey = "sharedPreferencesKey"
     val textToDecrypt = "textToDecrypt"
     val secretKey = mock<SecretKey>()
+    val editor = mock<SharedPreferences.Editor>()
     whenever(keyStoreHelper.getSecretKey()).thenReturn(secretKey)
+    whenever(sharedPreferences.edit()).thenReturn(editor)
+    whenever(editor.remove(sharedPreferencesKey)).thenReturn(editor)
     given(cipherHelper.decrypt(sharedPreferencesKey, textToDecrypt, secretKey))
         .willAnswer { throw InvalidKeyException() }
 
@@ -75,6 +75,31 @@ class EncryptionHelperTest {
 
     //then
     verify(keyStoreHelper).removeSecretKey()
+    verify(editor).remove(sharedPreferencesKey)
+    verify(editor).apply()
+    assertThat(returnedText).isEmpty()
+  }
+
+  @Test
+  fun `should remove stored data if decrypting the received String throws an Exception`() {
+    //given
+    val sharedPreferencesKey = "sharedPreferencesKey"
+    val textToDecrypt = "textToDecrypt"
+    val secretKey = mock<SecretKey>()
+    val editor = mock<SharedPreferences.Editor>()
+    whenever(keyStoreHelper.getSecretKey()).thenReturn(secretKey)
+    whenever(sharedPreferences.edit()).thenReturn(editor)
+    whenever(editor.remove(sharedPreferencesKey)).thenReturn(editor)
+    given(cipherHelper.decrypt(sharedPreferencesKey, textToDecrypt, secretKey))
+        .willAnswer { throw Exception() }
+
+    //when
+    val returnedText = encryptionHelper.decrypt(sharedPreferencesKey, textToDecrypt)
+
+    //then
+    verify(keyStoreHelper, never()).removeSecretKey()
+    verify(editor).remove(sharedPreferencesKey)
+    verify(editor).apply()
     assertThat(returnedText).isEmpty()
   }
 }

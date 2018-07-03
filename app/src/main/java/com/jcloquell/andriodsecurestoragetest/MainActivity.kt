@@ -52,6 +52,16 @@ class MainActivity : AppCompatActivity() {
     setUpViews()
   }
 
+  override fun onDestroy() {
+    val sharedPreferencesKeys = arrayOf(STRING_KEY, INTEGER_KEY, OBJECT_KEY, LIST_KEY)
+    sharedPreferencesKeys.filter {
+      secureStorage.containsObject(it)
+    }.forEach {
+      secureStorage.removeObject(it)
+    }
+    super.onDestroy()
+  }
+
   private fun createLateInitInstances() {
     secureStorage = SecureStorage(this)
     sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)

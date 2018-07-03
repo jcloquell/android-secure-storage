@@ -24,13 +24,4 @@ dependencies {
   implementation appDependencies.androidAppCompat
   implementation appDependencies.kotlinStdLib
   implementation appDependencies.gson
-
-  testImplementation appTestDependencies.junit
-  testImplementation appTestDependencies.assertJ
-  testImplementation(appTestDependencies.supportTestRunner, {
-    exclude group: 'com.android.support', module: 'support-annotations'
-  })
-  testImplementation(appTestDependencies.espresso, {
-    exclude group: 'com.android.support', module: 'support-annotations'
-  })
 }
