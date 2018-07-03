@@ -1,6 +1,6 @@
 # Android Secure Storage
 
-[![API](https://img.shields.io/badge/API-18%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=18)
+[![Download](https://api.bintray.com/packages/jcloquell/Maven/android-secure-storage/images/download.svg)](https://bintray.com/jcloquell/Maven/android-secure-storage/_latestVersion) [![API](https://img.shields.io/badge/API-18%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=18) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Why?
 
@@ -15,16 +15,21 @@ Depending on the API level, a different algorithm is used to generate the secret
 - From Android 4.3 (API 18) onwards: a symmetric secret key is generated (AES) and encrypted with an asymmetric key using RSA, ECB, and PKCS1 padding, and then saved in SharedPreferences.
 In both cases, the generated secret key is then used by a symmetric cipher which uses a AES, CBC and PKCS7 padding transformation, with a randomly generated Initialization Vector (IV), to finally encrypt/decrypt the data.
 
-## Setup
-
-- **Maven**
-```
-TBA
-```
+## Download
 
 - **Gradle**
 ```
-TBA
+compile 'com.jcloquell:android-secure-storage:latest_version'
+```
+
+- **Maven**
+```
+<dependency>
+  <groupId>com.jcloquell</groupId>
+  <artifactId>android-secure-storage</artifactId>
+  <version>latest_version</version>
+  <type>pom</type>
+</dependency>
 ```
 
 ## How to use

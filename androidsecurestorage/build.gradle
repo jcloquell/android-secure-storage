@@ -1,8 +1,46 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+  }
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply from: '../config/dependencies.gradle'
+
+ext {
+  bintrayRepo = 'Maven'
+  bintrayName = 'android-secure-storage'
+
+  publishedGroupId = 'com.jcloquell'
+  libraryName = 'AndroidSecureStorage'
+  artifact = 'android-secure-storage'
+
+  libraryDescription =
+      'Android library written in Kotlin for storing any kind of object in shared preferences in a secure way.'
+
+  siteUrl = 'https://github.com/jcloquell/android-secure-storage'
+  gitUrl = 'https://github.com/jcloquell/android-secure-storage.git'
+
+  libraryVersion = '0.1.0'
+
+  developerId = 'jcloquell'
+  developerName = 'Jorge Cloquell'
+  developerEmail = 'jorgecloquell@gmail.com'
+
+  licenseName = 'The Apache Software License, Version 2.0'
+  licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+  allLicenses = ["Apache-2.0"]
+}
 
 android {
   compileSdkVersion 28
@@ -11,7 +49,7 @@ android {
     minSdkVersion 18
     targetSdkVersion 28
     versionCode computeVersionCode()
-    versionName "1.0.0"
+    versionName "0.1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
@@ -32,3 +70,5 @@ dependencies {
   testImplementation appTestDependencies.assertJ
   testImplementation appTestDependencies.mockitoKotlin
 }
+
+apply from: '../config/maven_script.gradle'
