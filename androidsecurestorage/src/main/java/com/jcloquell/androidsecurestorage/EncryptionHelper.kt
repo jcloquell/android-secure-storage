@@ -28,9 +28,9 @@ class EncryptionHelper {
   private val keyStoreHelper: KeyStoreHelper
 
   constructor(context: Context) {
-    this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    this.cipherHelper = CipherHelper(sharedPreferences)
-    this.keyStoreHelper = KeyStoreHelper(context, sharedPreferences, cipherHelper)
+    sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    cipherHelper = CipherHelper(sharedPreferences)
+    keyStoreHelper = KeyStoreHelper(context, sharedPreferences, cipherHelper)
   }
 
   @VisibleForTesting
@@ -52,6 +52,9 @@ class EncryptionHelper {
       return cipherHelper.decrypt(sharedPreferencesKey, textToDecrypt, key)
     } catch (exception: InvalidKeyException) {
       keyStoreHelper.removeSecretKey()
+      sharedPreferences.edit().remove(sharedPreferencesKey).apply()
+    } catch (exception: Exception) {
+      sharedPreferences.edit().remove(sharedPreferencesKey).apply()
     }
     return ""
   }

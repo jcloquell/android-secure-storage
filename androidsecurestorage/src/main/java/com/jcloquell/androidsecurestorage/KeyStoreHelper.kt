@@ -63,10 +63,10 @@ internal class KeyStoreHelper constructor(private val context: Context,
   }
 
   internal fun removeSecretKey() {
-    keyStore.aliases().toList().forEach {
-      keyStore.deleteEntry(it)
+    if (keyStore.containsAlias(ALIAS_KEY)) {
+      keyStore.deleteEntry(ALIAS_KEY)
     }
-    sharedPreferences.edit().clear().apply()
+    sharedPreferences.edit().remove(ALIAS_KEY).apply()
   }
 
   @TargetApi(Build.VERSION_CODES.M)

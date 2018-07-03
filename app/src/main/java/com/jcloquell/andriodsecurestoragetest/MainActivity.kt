@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
   private fun generateHeavyObjectBasedOnUserInput(text: String): HeavyObject {
     val count = if (text.isEmpty()) 0 else text.toInt()
     return HeavyObject("This is a list of Hello Worlds:",
-        Array(count, { "Hello World! $it" }))
+        Array(count) { "Hello World! $it" })
   }
 
   private fun generateListBasedOnUserInput(text: String): List<String> {
