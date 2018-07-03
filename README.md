@@ -1,6 +1,6 @@
 # Android Secure Storage
 
-[![API](https://img.shields.io/badge/API-19%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=18)
+[![API](https://img.shields.io/badge/API-18%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=18)
 
 ## Why?
 
@@ -25,7 +25,7 @@ TBA
 - **Gradle**
 ```
 TBA
-``
+```
 
 ## How to use
 
@@ -46,6 +46,7 @@ secureStorage.storeObject("complexObjectKey", complexObject)
 ```
 
 To get the securely stored objects, normally you just need to pass the same key that was used when storing them and the Class of the object you want to get. For example, to get an Integer:
+
 Kotlin:
 ```kotlin
 val decryptedInteger = secureStorage.getObject("integerKey", Int::class.java)
@@ -56,6 +57,7 @@ Integer decryptedInteger = secureStorage.getObject("integerKey", Integer.class);
 ```
 
 And for getting a more complex object:
+
 Kotlin:
 ```kotlin
 val decryptedComplexObject = secureStorage.getObject("complexObjectKey", ComplexObject::class.java)
@@ -66,6 +68,7 @@ ComplexObject decryptedComplexObject = secureStorage.getObject("complexObjectKey
 ```
 
 It's also possible to store (same than above) and get Collections (List, HashMap, Set...) of objects by passing the Type instead of the Class to the same overloaded method, like this:
+
 Kotlin:
 ```kotlin
 val decryptedList = secureStorage.getObject<List<Object>>("listKey", object : TypeToken<List<Object>>() {}.type)
@@ -100,9 +103,9 @@ val decryptedString = encryptionHelper.decrypt(key, encryptedString)
 
 ## Limitations
 
-In order to encrypt Collections of objects (List, HashMap, Set...), [Gson](https://github.com/google/gson) is required, as the `Type` of the object needs to be passed as a parameter to the `SecureStorage`. To get the Type`, the `TypeToken` class (which is included in the Gson library) is necessary, as shown in the example above. You could also get the Type using reflection, but it's not a recommended practice.
+In order to encrypt Collections of objects (List, HashMap, Set...), [Gson](https://github.com/google/gson) is required, as the `Type` of the object needs to be passed as a parameter to the `SecureStorage`. To get the `Type`, the `TypeToken` class (which is included in the Gson library) is necessary, as shown in the example above. You could also get the Type using reflection, but it's not a recommended practice.
 
-If you don't use Gson in your project and don't want to add it as a dependency, you will need to wrap your Collection with a custom POJO to be able to encrypt it. In the sample app, there is an example of this, where a custom data class ("HeavyObject") contains an Array of Strings.
+If you don't use Gson in your project and don't want to add it as a dependency, you will need to wrap your Collection with a custom POJO to be able to encrypt it. In the sample app, there is an example of this, where a custom data class (`HeavyObject`) contains an Array of Strings.
 
 Also, if you are already using Gson in your project and the version differs from the one used internally in this library, to avoid version conflicts, you probably want to exclude the gson module when adding the library as a dependency in your `build.gradle` file.
 
