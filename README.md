@@ -19,7 +19,7 @@ In both cases, the generated secret key is then used by a symmetric cipher which
 
 - **Gradle**
 ```
-compile 'com.jcloquell:android-secure-storage:latest_version'
+implementation 'com.jcloquell:android-secure-storage:latest_version'
 ```
 
 - **Maven**

@@ -22,8 +22,8 @@ ext {
   bintrayName = 'android-secure-storage'
 
   publishedGroupId = 'com.jcloquell'
-  libraryName = 'AndroidSecureStorage'
-  artifact = 'android-secure-storage'
+  libraryName = 'Android Secure Storage'
+  artifact = 'androidsecurestorage'
 
   libraryDescription =
       'Android library written in Kotlin for storing any kind of object in shared preferences in a secure way.'
@@ -31,7 +31,7 @@ ext {
   siteUrl = 'https://github.com/jcloquell/android-secure-storage'
   gitUrl = 'https://github.com/jcloquell/android-secure-storage.git'
 
-  libraryVersion = '0.1.0'
+  libraryVersion = '0.1.1'
 
   developerId = 'jcloquell'
   developerName = 'Jorge Cloquell'
@@ -44,12 +44,12 @@ ext {
 
 android {
   compileSdkVersion 28
-  buildToolsVersion "28.0.0"
+  buildToolsVersion "28.0.1"
   defaultConfig {
     minSdkVersion 18
     targetSdkVersion 28
     versionCode computeVersionCode()
-    versionName "0.1.0"
+    versionName libraryVersion
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
