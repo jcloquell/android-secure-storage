@@ -19,14 +19,14 @@ In both cases, the generated secret key is then used by a symmetric cipher which
 
 - **Gradle**
 ```
-implementation 'com.jcloquell:android-secure-storage:latest_version'
+implementation 'com.jcloquell:androidsecurestorage:latest_version'
 ```
 
 - **Maven**
 ```
 <dependency>
   <groupId>com.jcloquell</groupId>
-  <artifactId>android-secure-storage</artifactId>
+  <artifactId>androidsecurestorage</artifactId>
   <version>latest_version</version>
   <type>pom</type>
 </dependency>
