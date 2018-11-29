@@ -20,7 +20,7 @@ ext {
   siteUrl = 'https://github.com/jcloquell/android-secure-storage'
   gitUrl = 'https://github.com/jcloquell/android-secure-storage.git'
 
-  libraryVersion = '0.1.1'
+  libraryVersion = '0.1.2'
 
   developerId = 'jcloquell'
   developerName = 'Jorge Cloquell'
@@ -33,7 +33,7 @@ ext {
 
 android {
   compileSdkVersion 28
-  buildToolsVersion "28.0.1"
+  buildToolsVersion "28.0.3"
   defaultConfig {
     minSdkVersion 18
     targetSdkVersion 28
