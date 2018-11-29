@@ -22,4 +22,11 @@
       android:title="@string/encrypt_list"
       app:showAsAction="never"/>
 
+  <item
+      android:id="@+id/asynchronousCheckbox"
+      android:checkable="true"
+      android:checked="true"
+      android:title="@string/asynchronous"
+      app:showAsAction="never"/>
+
 </menu>

@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun createLateInitInstances() {
-    secureStorage = SecureStorage(this)
+    secureStorage = SecureStorage(this, false)
     sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
   }
 
@@ -188,6 +188,11 @@ class MainActivity : AppCompatActivity() {
         encryptIntegerForm.visibility = GONE
         encryptObjectForm.visibility = GONE
         encryptListForm.visibility = VISIBLE
+        true
+      }
+      R.id.asynchronousCheckbox -> {
+        item.isChecked = !item.isChecked
+        secureStorage = SecureStorage(this, item.isChecked)
         true
       }
       else -> super.onOptionsItemSelected(item)

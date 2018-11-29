@@ -15,6 +15,7 @@
  */
 package com.jcloquell.androidsecurestorage
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
@@ -23,26 +24,30 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.lang.reflect.Type
 
+@SuppressLint("CommitPrefEdits")
 class SecureStorage {
 
   private val sharedPreferences: SharedPreferences
   private val gson: Gson
   private val encryptionHelper: EncryptionHelper
+  private val isAsynchronous: Boolean
 
-  constructor(context: Context) : this(PreferenceManager.getDefaultSharedPreferences(context),
-      GsonBuilder().create(), EncryptionHelper(context))
+  constructor(context: Context, isAsynchronous: Boolean = true) :
+      this(PreferenceManager.getDefaultSharedPreferences(context), GsonBuilder().create(),
+          EncryptionHelper(context, isAsynchronous), isAsynchronous)
 
   @VisibleForTesting
   internal constructor(sharedPreferences: SharedPreferences, gson: Gson,
-      encryptionHelper: EncryptionHelper) {
+      encryptionHelper: EncryptionHelper, isAsynchronous: Boolean) {
     this.sharedPreferences = sharedPreferences
     this.gson = gson
     this.encryptionHelper = encryptionHelper
+    this.isAsynchronous = isAsynchronous
   }
 
   fun storeObject(key: String, objectToStore: Any) {
     val encryptedObject = encryptionHelper.encrypt(key, gson.toJson(objectToStore))
-    sharedPreferences.edit().putString(key, encryptedObject).apply()
+    sharedPreferences.edit().putString(key, encryptedObject).save(isAsynchronous)
   }
 
   fun <T> getObject(key: String, clazz: Class<T>): T? {
@@ -62,7 +67,7 @@ class SecureStorage {
   }
 
   fun removeObject(key: String) {
-    sharedPreferences.edit().remove(key).apply()
+    sharedPreferences.edit().remove(key).save(isAsynchronous)
   }
 
   fun containsObject(key: String): Boolean {

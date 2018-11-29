@@ -15,30 +15,35 @@
  */
 package com.jcloquell.androidsecurestorage
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.support.annotation.VisibleForTesting
 import java.security.InvalidKeyException
 
+@SuppressLint("CommitPrefEdits")
 class EncryptionHelper {
 
   private val sharedPreferences: SharedPreferences
   private val cipherHelper: CipherHelper
   private val keyStoreHelper: KeyStoreHelper
+  private val isAsynchronous: Boolean
 
-  constructor(context: Context) {
+  constructor(context: Context, isAsynchronous: Boolean = true) {
     sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    cipherHelper = CipherHelper(sharedPreferences)
-    keyStoreHelper = KeyStoreHelper(context, sharedPreferences, cipherHelper)
+    cipherHelper = CipherHelper(sharedPreferences, isAsynchronous)
+    keyStoreHelper = KeyStoreHelper(context, sharedPreferences, cipherHelper, isAsynchronous)
+    this.isAsynchronous = isAsynchronous
   }
 
   @VisibleForTesting
   internal constructor(sharedPreferences: SharedPreferences, cipherHelper: CipherHelper,
-      keyStoreHelper: KeyStoreHelper) {
+      keyStoreHelper: KeyStoreHelper, isAsynchronous: Boolean) {
     this.sharedPreferences = sharedPreferences
     this.cipherHelper = cipherHelper
     this.keyStoreHelper = keyStoreHelper
+    this.isAsynchronous = isAsynchronous
   }
 
   fun encrypt(sharedPreferencesKey: String, textToEncrypt: String): String {
@@ -52,9 +57,7 @@ class EncryptionHelper {
       return cipherHelper.decrypt(sharedPreferencesKey, textToDecrypt, key)
     } catch (exception: InvalidKeyException) {
       keyStoreHelper.removeSecretKey()
-      sharedPreferences.edit().remove(sharedPreferencesKey).apply()
-    } catch (exception: Exception) {
-      sharedPreferences.edit().remove(sharedPreferencesKey).apply()
+      sharedPreferences.edit().remove(sharedPreferencesKey).save(isAsynchronous)
     }
     return ""
   }

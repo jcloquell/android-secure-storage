@@ -15,13 +15,16 @@
  */
 package com.jcloquell.androidsecurestorage
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.util.Base64
 import java.security.Key
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 
-internal class CipherHelper constructor(private val sharedPreferences: SharedPreferences) {
+@SuppressLint("CommitPrefEdits")
+internal class CipherHelper constructor(private val sharedPreferences: SharedPreferences,
+    private val isAsynchronous: Boolean) {
 
   companion object {
     private const val TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding"
@@ -54,7 +57,7 @@ internal class CipherHelper constructor(private val sharedPreferences: SharedPre
     return Base64.encodeToString(bytes, Base64.DEFAULT)
   }
 
-  internal fun unwrapKey(wrappedKeyData: String, keyToUnwrapWith: Key?): Key {
+  internal fun unwrapKey(wrappedKeyData: String?, keyToUnwrapWith: Key?): Key {
     asymmetricCipher.init(Cipher.UNWRAP_MODE, keyToUnwrapWith)
     val encryptedData = Base64.decode(wrappedKeyData, Base64.DEFAULT)
     return asymmetricCipher.unwrap(encryptedData, AES_ALGORITHM, Cipher.SECRET_KEY)
@@ -63,7 +66,7 @@ internal class CipherHelper constructor(private val sharedPreferences: SharedPre
   private fun saveIvInSharedPreferences(sharedPreferencesKey: String, iv: ByteArray) {
     val encodedIv = Base64.encodeToString(iv, Base64.DEFAULT)
     sharedPreferences.edit().putString("$IV_PREFERENCES_KEY$sharedPreferencesKey", encodedIv)
-        .apply()
+        .save(isAsynchronous)
   }
 
   private fun getIvFromSharedPreferences(sharedPreferencesKey: String): ByteArray {

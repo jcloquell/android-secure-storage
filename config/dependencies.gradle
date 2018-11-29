@@ -1,6 +1,6 @@
 ext {
   //Libraries
-  androidSupportVersion = '27.1.1'
+  androidSupportVersion = '28.0.0'
   kotlinStdLibVersion = kotlinVersion
   gsonVersion = '2.8.5'
 

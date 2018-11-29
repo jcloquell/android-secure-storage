@@ -20,7 +20,7 @@ class SecureStorageTest {
 
   @Before
   fun setUp() {
-    secureStorage = SecureStorage(sharedPreferences, gson, encryptionHelper)
+    secureStorage = SecureStorage(sharedPreferences, gson, encryptionHelper, true)
   }
 
   @Test

@@ -15,6 +15,7 @@
  */
 package com.jcloquell.androidsecurestorage
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
@@ -32,9 +33,11 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.security.auth.x500.X500Principal
 
-internal class KeyStoreHelper constructor(private val context: Context,
+@SuppressLint("CommitPrefEdits")
+internal class KeyStoreHelper(private val context: Context,
     private val sharedPreferences: SharedPreferences,
-    private val cipherHelper: CipherHelper) {
+    private val cipherHelper: CipherHelper,
+    private val isAsynchronous: Boolean) {
 
   companion object {
     private const val ANDROID_KEY_STORE = "AndroidKeyStore"
@@ -66,7 +69,7 @@ internal class KeyStoreHelper constructor(private val context: Context,
     if (keyStore.containsAlias(ALIAS_KEY)) {
       keyStore.deleteEntry(ALIAS_KEY)
     }
-    sharedPreferences.edit().remove(ALIAS_KEY).apply()
+    sharedPreferences.edit().remove(ALIAS_KEY).save(isAsynchronous)
   }
 
   @TargetApi(Build.VERSION_CODES.M)
@@ -84,7 +87,7 @@ internal class KeyStoreHelper constructor(private val context: Context,
     val keyGenerator = KeyGenerator.getInstance(AES_ALGORITHM)
     val secretKey = keyGenerator.generateKey()
     val encryptedSecretKey = cipherHelper.wrapKey(secretKey, getRsaKeyPair()?.public)
-    sharedPreferences.edit().putString(ALIAS_KEY, encryptedSecretKey).apply()
+    sharedPreferences.edit().putString(ALIAS_KEY, encryptedSecretKey).save(isAsynchronous)
     return secretKey
   }
 
