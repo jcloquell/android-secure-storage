@@ -45,11 +45,13 @@ class SecureStorage {
     this.isAsynchronous = isAsynchronous
   }
 
+  @Synchronized
   fun storeObject(key: String, objectToStore: Any) {
     val encryptedObject = encryptionHelper.encrypt(key, gson.toJson(objectToStore))
     sharedPreferences.edit().putString(key, encryptedObject).save(isAsynchronous)
   }
 
+  @Synchronized
   fun <T> getObject(key: String, clazz: Class<T>): T? {
     val encryptedObject = sharedPreferences.getString(key, null)
     return encryptedObject?.let {
@@ -58,6 +60,7 @@ class SecureStorage {
     }
   }
 
+  @Synchronized
   fun <T> getObject(key: String, type: Type): T? {
     val encryptedObject = sharedPreferences.getString(key, null)
     return encryptedObject?.let {
@@ -66,10 +69,12 @@ class SecureStorage {
     }
   }
 
+  @Synchronized
   fun removeObject(key: String) {
     sharedPreferences.edit().remove(key).save(isAsynchronous)
   }
 
+  @Synchronized
   fun containsObject(key: String): Boolean {
     return sharedPreferences.contains(key)
   }

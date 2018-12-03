@@ -46,11 +46,13 @@ class EncryptionHelper {
     this.isAsynchronous = isAsynchronous
   }
 
+  @Synchronized
   fun encrypt(sharedPreferencesKey: String, textToEncrypt: String): String {
     val key = keyStoreHelper.getSecretKey()
     return cipherHelper.encrypt(sharedPreferencesKey, textToEncrypt, key)
   }
 
+  @Synchronized
   fun decrypt(sharedPreferencesKey: String, textToDecrypt: String): String {
     try {
       val key = keyStoreHelper.getSecretKey()
