@@ -20,7 +20,7 @@ ext {
   siteUrl = 'https://github.com/jcloquell/android-secure-storage'
   gitUrl = 'https://github.com/jcloquell/android-secure-storage.git'
 
-  libraryVersion = '0.1.3'
+  libraryVersion = '0.1.4'
 
   developerId = 'jcloquell'
   developerName = 'Jorge Cloquell'
