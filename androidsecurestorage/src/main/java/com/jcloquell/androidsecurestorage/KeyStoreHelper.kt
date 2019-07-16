@@ -74,12 +74,9 @@ internal class KeyStoreHelper(private val context: Context,
 
   @TargetApi(Build.VERSION_CODES.M)
   private fun createAndroidMAndAboveSecretKey(): SecretKey {
-    val startCalendar = Calendar.getInstance()
-    startCalendar.add(Calendar.DAY_OF_MONTH, -1)
     val keyGenerator = KeyGenerator.getInstance(AES_ALGORITHM, ANDROID_KEY_STORE)
     val builder = KeyGenParameterSpec.Builder(ALIAS_KEY,
         KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
-        .setKeyValidityStart(startCalendar.time)
         .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
         .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
     keyGenerator.init(builder.build())
@@ -107,6 +104,7 @@ internal class KeyStoreHelper(private val context: Context,
   private fun createRsaKeyPair(): KeyPair {
     val keyPairGenerator = KeyPairGenerator.getInstance(RSA_ALGORITHM, ANDROID_KEY_STORE)
     val start = Calendar.getInstance()
+    start.add(Calendar.DAY_OF_YEAR, -2)
     val end = Calendar.getInstance()
     end.add(Calendar.YEAR, 30)
     val builder = KeyPairGeneratorSpec.Builder(context)
